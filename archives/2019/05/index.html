@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>zzx&#39;s blog</title>
+  <title>Archives: 2019/5 | zzx&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="zzx&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/archives/2019/05/index.html">
 <meta property="og:site_name" content="zzx&#39;s blog">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
@@ -152,133 +152,47 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-最小生成树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/06/最小生成树/">最小生成树</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/06/最小生成树/" class="archive-article-date">
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/05/06/最小生成树/" class="archive-article-date">
   	<time datetime="2019-05-06T08:39:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-06</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#最小生成树</p>
-<p>##prim和kruskal生成最小生成树算法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">#define max 10</span><br><span class="line">#define INF 65535</span><br><span class="line"></span><br><span class="line">//prim算法，适合在稠密图，时间复杂度是顶点的平方</span><br><span class="line">//adjvex数组的作用就是标记我们第k个顶点的连边是adjvex[k]</span><br><span class="line">void MiniSpanTree_prim(MGraph g)&#123;</span><br><span class="line">	int min,i,j,k;</span><br><span class="line">	int adjvex[max];				//保存相关顶点下标</span><br><span class="line">	int lowcost[max];				//保存相关顶点间的权值</span><br><span class="line">	lowcost[0]=0;					//从顶点0开始构建,表示最小生成树与其他顶点的距离</span><br><span class="line">	adjvex[0]=0;</span><br><span class="line">	for(i=1;i&lt;g.numvertexes;i++)&#123;	//循环除0外的其他顶点数</span><br><span class="line">		lowcost[i]=g.arc[0][j];</span><br><span class="line">		adjvex[i]=0;				//初始化为v0的下标</span><br><span class="line">	&#125;</span><br><span class="line">	for(i=1;i&lt;g.numvertexes;i++)&#123;</span><br><span class="line">		min=INF;</span><br><span class="line">		j=1;</span><br><span class="line">		k=0;</span><br><span class="line">		while(j&lt;g.numvertexes)&#123;		//循环所有顶点</span><br><span class="line">			if(lowcost[j]!=0&amp;&amp;lowcost[j]&lt;min)&#123;</span><br><span class="line">				min=lowcost[j];</span><br><span class="line">				k=j;				//标记最小权值的点</span><br><span class="line">			&#125;</span><br><span class="line">			j++;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		lowcost[j]=0;</span><br><span class="line">		cout&lt;&lt;adjvex[k]&lt;&lt;&apos; &apos;&lt;&lt;k;	//打印最短的路径</span><br><span class="line">		for(j=1;j&lt;g.numvertexes;j++)&#123;</span><br><span class="line">			if(lowcost[j]!=0&amp;&amp;g.arc[i][j]&lt;lowcost[j])&#123;</span><br><span class="line">				lowcost[j]=g.arc[i][j];</span><br><span class="line">				adjvex[j]=k;	</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//kruskal算法</span><br><span class="line">//适合稀疏图，顶点多边少nlogn</span><br><span class="line">struct  Edge</span><br><span class="line">&#123;</span><br><span class="line">	int begin,end,weight;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bool cmp(Edge a,Edge b)&#123;</span><br><span class="line">	return a.weight&lt;b.weight;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int find(int *parent,int f)&#123;			//查找图是否连通</span><br><span class="line">	while(parent[f]&gt;0)&#123;</span><br><span class="line">		f=parent;</span><br><span class="line">	&#125;</span><br><span class="line">	return f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void MiniSpanTree_Kruskal(MGaph g)&#123;</span><br><span class="line">	Edge edge[max];</span><br><span class="line">	int parent;							//定义数组是否形成回路</span><br><span class="line">	/*将结构体按权值从小到大排序*/</span><br><span class="line">	sort(edge,g.numvertexes,cmp);</span><br><span class="line">	for(int i=0;i&lt;g.numvertexes;i++)&#123;</span><br><span class="line">		parent[i]=0;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i=0;i&lt;g.numvertexes;i++)&#123;</span><br><span class="line">		n=find(parent,edge[i].begin);</span><br><span class="line">		m=find(parent,edge[i].end);</span><br><span class="line">		if(n!=m)&#123;</span><br><span class="line">			parent[n]=m;</span><br><span class="line">			cout&lt;&lt;edge[i].begin&lt;&lt;&apos; &apos;&lt;&lt;edge[i].end&lt;&lt;&apos; &apos;&lt;&lt;edge[i].weight;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/06/最小生成树/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-这是我的第一个博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/04/这是我的第一个博客/">这是我的第一个博客</a>
+      <a class="archive-article-title" href="/2019/05/06/最小生成树/">最小生成树</a>
     </h1>
   
 
-        
-        <a href="/2019/03/04/这是我的第一个博客/" class="archive-article-date">
-  	<time datetime="2019-03-04T03:21:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这是我的第一个博客，经过了两天的试错，终于搭建好了，激动！！！</span><br><span class="line">2019年3月4日</span><br><span class="line">于哈尔滨工程大学第十公寓</span><br></pre></td></tr></table></figure>
-      
+        <div class="article-info info-on-right">
+          
+          
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/04/这是我的第一个博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
+    </div></section>
+  
+
+    
 
 
           </div>
@@ -300,9 +214,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
